@@ -1,0 +1,23 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('pr_attachments', function (Blueprint $table): void {
+            $table->string('stage', 20)->default('create')->after('pr_supplier_id')->index();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('pr_attachments', function (Blueprint $table): void {
+            $table->dropIndex(['stage']);
+            $table->dropColumn('stage');
+        });
+    }
+};
